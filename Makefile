@@ -26,7 +26,9 @@ endif
 # Source Files
 SRCS = $(wildcard $(QUANTUM_DIR)/*.c) \
        $(wildcard $(FIELD_DIR)/*.c) \
-       $(wildcard $(TOOLS_DIR)/*.c)
+       $(wildcard $(TOOLS_DIR)/*.c) \
+       source/noesis_api.c \
+       source/main.c
 
 # Test Files
 TEST_SRCS = $(wildcard $(TEST_DIR)/*.c)
@@ -34,7 +36,9 @@ TEST_SRCS = $(wildcard $(TEST_DIR)/*.c)
 # Object Files
 OBJS = $(patsubst $(QUANTUM_DIR)/%.c, $(OBJ_DIR)/quantum/%.o, $(filter $(QUANTUM_DIR)/%, $(SRCS))) \
        $(patsubst $(FIELD_DIR)/%.c, $(OBJ_DIR)/quantum/field/%.o, $(filter $(FIELD_DIR)/%, $(SRCS))) \
-       $(patsubst $(TOOLS_DIR)/%.c, $(OBJ_DIR)/tools/%.o, $(filter $(TOOLS_DIR)/%, $(SRCS)))
+       $(patsubst $(TOOLS_DIR)/%.c, $(OBJ_DIR)/tools/%.o, $(filter $(TOOLS_DIR)/%, $(SRCS))) \
+       $(OBJ_DIR)/noesis_api.o \
+       $(OBJ_DIR)/main.o
 
 # Test Object Files
 TEST_OBJS = $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/tests/%.o, $(TEST_SRCS))
@@ -45,13 +49,24 @@ TEST_TARGET = $(BIN_DIR)/noesis_extend_tests
 
 # Flags
 CFLAGS = -Wall -Wextra -std=c99
-LDFLAGS = -L$(LIB_DIR) -lnoesis_core -Wl,-rpath,$(LIB_DIR)
+LDFLAGS = -ldl
 
 # Add include directory to the compiler's include path
 CFLAGS += -Iinclude -I$(CORE_LIB_DIR)/include
 
+# Check if we're building standalone
+ifdef BUILD_STANDALONE
+    CFLAGS += -DSTANDALONE_MODE
+else
+    LDFLAGS += -L$(LIB_DIR) -lnoesis_core -Wl,-rpath,$(LIB_DIR)
+endif
+
 # Default target
 all: setup $(TARGET)
+
+# Standalone target
+standalone: 
+	$(MAKE) BUILD_STANDALONE=1 setup $(TARGET)
 
 # Setup directories
 setup:
@@ -62,7 +77,17 @@ $(TARGET): $(OBJS)
 	@mkdir -p $(BIN_DIR)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(TARGET)
 
-# Rule to create object files in the object directory
+# Rule for API implementation
+$(OBJ_DIR)/noesis_api.o: source/noesis_api.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Rule for main file
+$(OBJ_DIR)/main.o: source/main.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Rules to create object files in the object directory
 $(OBJ_DIR)/quantum/%.o: $(QUANTUM_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -97,4 +122,4 @@ install: all
 	@echo "Noesis-Extend has been built and installed to the bin directory"
 	@echo "You can run it with: ./run.fish"
 
-.PHONY: all setup test clean install
+.PHONY: all setup test clean install standalone

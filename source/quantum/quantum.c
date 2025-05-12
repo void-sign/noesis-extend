@@ -26,9 +26,11 @@
  *    or other living beings.
  */
 
-// quantum.c – core gate & circuit logic (no libc)
+// quantum.c – core gate & circuit logic
 #include "../../include/quantum/quantum.h"
-#include "../data/gate_defs.h"
+#include "../../include/noesis_api.h"
+#include "../../data/gate_defs.h"
+#include <stdlib.h>
 
 #define MAX_QUBITS 16
 #define MAX_GATES  256
@@ -37,6 +39,9 @@ static Qubit qubits[MAX_QUBITS];
 static Gate  gates[MAX_GATES];
 static Circuit circuit;
 
+// API reference - will be NULL in standalone mode
+static NoesisAPI *noesis_api = NULL;
+
 void q_init() {
     for (int i = 0; i < MAX_QUBITS; i++) {
         qubits[i].id = i;
@@ -44,6 +49,33 @@ void q_init() {
     }
     circuit.num_qubits = 0;
     circuit.num_gates = 0;
+    
+    // Try to load Noesis API if not in standalone mode
+    #ifndef STANDALONE_MODE
+    if (!noesis_api) {
+        const char* lib_paths[] = {
+            getenv("NOESIS_LIB"),
+            "/usr/local/lib/libnoesis_core.so",
+            "/usr/local/lib/libnoesis_core.dylib", // macOS
+            "/usr/lib/libnoesis_core.so",
+            "../noesis/lib/libnoesis_core.so",
+            "../noesis/lib/libnoesis_core.dylib", // macOS
+            NULL
+        };
+        
+        for (int i = 0; lib_paths[i] != NULL; i++) {
+            if (lib_paths[i]) {
+                noesis_api = load_noesis_api(lib_paths[i]);
+                if (noesis_api) break;
+            }
+        }
+        
+        // Initialize Noesis if API was loaded
+        if (noesis_api && noesis_api->init) {
+            noesis_api->init();
+        }
+    }
+    #endif
 }
 
 Qubit* q_alloc() {
@@ -95,4 +127,32 @@ int str_eq(const char* a, const char* b) {
         a++; b++;
     }
     return *a == *b;
+}
+
+// --- Noesis Core integration ---
+
+int q_process_with_noesis(const char* input, char* output, int max_len) {
+    #ifdef STANDALONE_MODE
+    // In standalone mode, provide minimal functionality
+    const char* standalone_msg = "Running in standalone mode. Noesis Core not available.";
+    int len = 0;
+    while (*standalone_msg && len < max_len - 1) {
+        output[len++] = *standalone_msg++;
+    }
+    output[len] = '\0';
+    return len;
+    #else
+    // Use Noesis Core if available
+    if (noesis_api && noesis_api->process) {
+        return noesis_api->process(input, output, max_len);
+    } else {
+        const char* error_msg = "Noesis Core API not available.";
+        int len = 0;
+        while (*error_msg && len < max_len - 1) {
+            output[len++] = *error_msg++;
+        }
+        output[len] = '\0';
+        return len;
+    }
+    #endif
 }

@@ -43,6 +43,9 @@ Qubit*   q_alloc();                               // allocate qubit
 int      q_add_gate(const char* name, int*, int); // add gate to circuit
 Circuit* q_get_circuit();                         // return circuit object
 
+// Noesis Core integration
+int      q_process_with_noesis(const char* input, char* output, int max_len); // Process input with Noesis Core API
+
 // internal utils
 int str_eq(const char*, const char*);             // compare string (no libc)
 

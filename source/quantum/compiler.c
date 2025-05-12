@@ -82,7 +82,11 @@ void compile_logic_file(const char* path) {
     extern const char* read_line(int); // stub in test
     int lineno = 0;
     const char* line;
+    
+    // Avoid unused parameter warning
+    (void)path;
+    
     while ((line = read_line(lineno++)) != 0) {
-        parse_line(line);
+        parse_logic_line(line);
     }
 }

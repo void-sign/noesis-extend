@@ -9,8 +9,4 @@
 // Returns 0 on success, non-zero on error
 void compile_logic_file(const char* filepath);
 
-// Parse a single logic line into gate(s)
-// Returns number of gates added or -1 on error
-void parse_logic_line(const char* line);
-
 #endif
