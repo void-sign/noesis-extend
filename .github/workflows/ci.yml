@@ -1,0 +1,54 @@
+name: Noesis-Extend CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential fish
+        
+    - name: Checkout Noesis Core
+      uses: actions/checkout@v2
+      with:
+        repository: void-sign/noesis
+        path: noesis
+        
+    - name: Build Noesis Core
+      working-directory: ./noesis
+      run: |
+        make
+        mkdir -p lib
+        gcc -shared -o lib/libnoesis_core.so object/core/*.o object/utils/*.o object/asm/*.o
+        
+    - name: Set environment variables
+      run: |
+        echo "NOESIS_CORE_PATH=$(pwd)/noesis" >> $GITHUB_ENV
+        
+    - name: Build Noesis-Extend
+      run: |
+        ./link_libraries.fish
+        make
+        
+    - name: Run tests
+      run: |
+        make test
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: noesis-extend-build
+        path: |
+          bin/
+          lib/
+          include/
