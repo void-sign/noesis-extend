@@ -1,6 +1,6 @@
 # Noesis Project Ecosystem
 
-This document provides an overview of the Noesis project ecosystem, which is now split into separate repositories.
+This document provides an overview of the Noesis project ecosystem, which consists of independent yet compatible components.
 
 ## Repositories
 
@@ -19,34 +19,58 @@ The core of the Noesis synthetic consciousness engine, featuring:
 ### 2. Noesis-Extend
 **Repository:** https://github.com/void-sign/noesis-extend
 
-Extensions and tools for the Noesis core, featuring:
+An independent extension to the Noesis ecosystem, featuring:
 - Quantum computing modules
 - Field theory implementations
 - Specialized tools (qbuild, qrun)
 
 **License:** MIT License (permissive use)
 
-## Integration
+## Independent Extension Architecture
 
-The two repositories are designed to work together, with Noesis-Extend depending on Noesis Core. The relationship is managed through:
+Noesis-Extend now follows an independent extension architecture:
 
-1. **Environment Variables:**
-   - `NOESIS_CORE_PATH` - Points to the location of Noesis Core
-   - `LD_LIBRARY_PATH` - Includes the path to Noesis Core's lib directory
+1. **Optional Core Integration:**
+   - Noesis-Extend can operate independently or integrate with Noesis Core
+   - Integration is handled through a plugin architecture
+   - No hard dependency on Noesis Core
 
-2. **Installation Scripts:**
-   - The `install_dependency.fish` script in Noesis-Extend can automatically download and build Noesis Core
-   - The `link_libraries.fish` script creates the necessary library links
+2. **Flexible Configuration:**
+   - Environment variable `NOESIS_CORE_PATH` is optional
+   - Extensions auto-discover core functionality when available
+   - Graceful fallback to standalone mode when core is unavailable
 
-3. **Helper Utilities:**
-   - `launch_noesis_env.fish` scripts in both repositories set up the environment and open both projects in VS Code
+3. **Extension API:**
+   - Standardized API for all Noesis extensions
+   - Well-defined interface boundaries
+   - Versioned API compatibility
 
-## Choosing the Right Repository
+## Choosing the Right Components
 
-- If you only need the core consciousness simulation functionality, use **Noesis Core**
-- If you need advanced quantum features or tools, use **Noesis-Extend** (which depends on Core)
-- For contributors, select the appropriate repository based on what functionality you're enhancing
+- **Noesis Core:** For core consciousness simulation functionality
+- **Noesis-Extend:** For quantum computing and field theory extensions (can be used independently)
+- **Combined Use:** For maximum functionality with both components working together
+- **Custom Integration:** Mix and match with your own components using the extension API
+
+## Integration Methods
+
+Noesis-Extend offers multiple integration options:
+
+1. **Standalone Mode:**
+   - Use Noesis-Extend completely independently
+   - All quantum functionality works without Core
+   - Access through standard APIs defined in `include/quantum`
+
+2. **Plugin Mode:**
+   - Dynamically discovers and connects to Noesis Core at runtime
+   - `link_libraries.fish` creates optional connections if Core is detected
+   - Enables advanced hybrid consciousness-quantum algorithms
+
+3. **API Compatibility:**
+   - All extensions follow the same API contract
+   - Versioned interfaces ensure forward compatibility
+   - Custom extensions can be developed using the same pattern
 
 ## Migration from Previous Versions
 
-If you were using the previous single-repository version of Noesis, please see the [MIGRATION.md](MIGRATION.md) guide for detailed migration instructions.
+If you were using the previous integrated version of Noesis, please see the [MIGRATION.md](MIGRATION.md) guide for detailed migration instructions, including how to adapt to the new independent extension architecture.
