@@ -11,16 +11,22 @@ Noesis has been split into two repositories:
 
 Please ensure your contributions go to the appropriate repository.
 
+### Independent Extension Architecture
+Noesis-Extend now follows an independent extension architecture:
+- Can operate standalone without requiring Noesis Core
+- Can integrate with Noesis Core through a plugin architecture when available
+- Uses a standardized Extension API for compatibility
+
 ### License
 Contributions to Noesis-Extend are licensed under the MIT License. By contributing, you agree that your code will be distributed under this license.
 
 ## Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/your-username/noesis-extend.git`
-3. Install the Noesis Core dependency: `./scripts/install_dependency.fish`
-4. Build the project: `./install.fish`
-5. Create a branch: `git checkout -b your-feature-branch`
+2. Clone your fork: `git clone https://github.com/void-sign/noesis-extend.git`
+3. Build the project in standalone mode: `./install.fish`
+   - Optionally, if you want Core integration: `./fish_scripts/install_dependency.fish`
+4. Create a branch: `git checkout -b your-feature-branch`
 
 ## Making Changes
 
@@ -39,16 +45,23 @@ Contributions to Noesis-Extend are licensed under the MIT License. By contributi
 ## Testing
 
 - Add tests for new features
+- Test in both standalone and integrated modes when applicable
 - Ensure all tests pass before submitting
 - Include documentation for new features
 
-## Dependencies
+## Integration with Noesis Core
 
-This repository depends on Noesis Core. If your changes require modifications to Noesis Core, please:
+Noesis-Extend follows an independent extension architecture that can operate with or without Noesis Core:
 
-1. First make a PR to the Noesis Core repository
-2. Reference the Noesis Core PR in your Noesis-Extend PR
-3. Only proceed with merging after the Noesis Core changes are accepted
+1. **Standalone Mode:** All quantum functionality works independently without Core
+2. **Plugin Mode:** Can dynamically connect to Noesis Core if available
+
+If your changes affect Core integration:
+
+1. Make a PR to the Noesis Core repository if needed
+2. Reference any Noesis Core PR in your Noesis-Extend PR
+3. Ensure your changes respect the optional nature of Core integration
+4. Test functionality both with and without Core present
 
 ## Communication
 
