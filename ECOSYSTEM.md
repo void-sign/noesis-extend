@@ -16,13 +16,13 @@ The core of the Noesis synthetic consciousness engine, featuring:
 
 **License:** Custom Noesis License (requires attribution and profit-sharing for commercial use)
 
-### 2. Noesis-Extend
-**Repository:** https://github.com/void-sign/noesis-extend
+### 2. Noesis Hub
+**Repository:** https://github.com/void-sign/noesis-hub
 
-An independent extension to the Noesis ecosystem, featuring:
-- Quantum computing modules
-- Field theory implementations
-- Specialized tools (qbuild, qrun)
+An independent connector hub for the Noesis ecosystem, featuring:
+- Platform integration interfaces
+- Standardized connectors for external systems
+- Integration tools and utilities
 
 **License:** MIT License (permissive use)
 

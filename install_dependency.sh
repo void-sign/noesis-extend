@@ -101,7 +101,7 @@ fi
 cd ..
 NOESIS_HOME=$(pwd)/$INSTALL_DIR
 echo "Noesis Core installed successfully at: $NOESIS_HOME"
-echo "To use it with Noesis-Extend, run:"
+echo "To use it with Noesis Hub, run:"
 echo "export NOESIS_CORE_PATH=$NOESIS_HOME"
 
 # Export for current session

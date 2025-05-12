@@ -95,7 +95,7 @@ int q_add_gate(const char* name, int targets[], int ntargets) {
         return -1;
 
     Gate* g = &gates[circuit.num_gates];
-    int i;
+    unsigned int i;
     for (i = 0; i < GATE_TABLE_LEN; i++) {
         if (str_eq(GATE_TABLE[i].name, name)) {
             g->type = GATE_TABLE[i].type;

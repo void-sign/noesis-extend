@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "Noesis Extend Installation Script"
-echo "================================"
+echo "Noesis Hub Installation Script"
+echo "=============================="
 echo 
 
 # Check for Noesis Core shared library

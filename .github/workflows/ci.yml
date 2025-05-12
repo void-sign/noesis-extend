@@ -1,4 +1,4 @@
-name: Noesis-Extend CI
+name: Noesis Hub CI
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
       run: |
         echo "NOESIS_CORE_PATH=$(pwd)/noesis" >> $GITHUB_ENV
         
-    - name: Build Noesis-Extend
+    - name: Build Noesis Hub
       run: |
         ./link_libraries.fish
         make
@@ -47,7 +47,7 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: noesis-extend-build
+        name: noesis-hub-build
         path: |
           bin/
           lib/

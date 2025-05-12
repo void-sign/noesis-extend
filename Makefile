@@ -1,4 +1,4 @@
-# Noesis Extend Makefile
+# Noesis Hub Makefile
 
 # Compiler
 CC = gcc
@@ -44,8 +44,8 @@ OBJS = $(patsubst $(QUANTUM_DIR)/%.c, $(OBJ_DIR)/quantum/%.o, $(filter $(QUANTUM
 TEST_OBJS = $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/tests/%.o, $(TEST_SRCS))
 
 # Executables
-TARGET = $(BIN_DIR)/noesis_extend
-TEST_TARGET = $(BIN_DIR)/noesis_extend_tests
+TARGET = $(BIN_DIR)/noesis_hub
+TEST_TARGET = $(BIN_DIR)/noesis_hub_tests
 
 # Flags
 CFLAGS = -Wall -Wextra -std=c99

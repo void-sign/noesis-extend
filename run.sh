@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Run script for Noesis-Extend
+# Run script for Noesis Hub
 
 # Check if the executable exists
-if [ ! -f "./bin/noesis_extend" ]; then
-    echo "Noesis-Extend executable not found. Building first..."
+if [ ! -f "./bin/noesis_hub" ]; then
+    echo "Noesis Hub executable not found. Building first..."
     ./install.sh
     if [ $? -ne 0 ]; then
         echo "Build failed. Please check the error messages above."
@@ -27,5 +27,5 @@ else
     echo "Running in standalone mode (Noesis Core functionality disabled)"
 fi
 
-echo "Running Noesis-Extend..."
-./bin/noesis_extend "$@"
+echo "Running Noesis Hub..."
+./bin/noesis_hub "$@"

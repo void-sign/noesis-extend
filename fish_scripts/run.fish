@@ -1,10 +1,10 @@
 #!/bin/fish
 
-# Run script for Noesis-Extend
+# Run script for Noesis Hub
 
 # Check if the executable exists
-if not test -f "./bin/noesis_extend"
-    echo "Noesis-Extend executable not found. Building first..."
+if not test -f "./bin/noesis_hub"
+    echo "Noesis Hub executable not found. Building first..."
     ./install.fish
     if test $status -ne 0
         echo "Build failed. Please check the error messages above."
@@ -27,5 +27,5 @@ else
     echo "Running in standalone mode (Noesis Core functionality disabled)"
 end
 
-echo "Running Noesis-Extend..."
-./bin/noesis_extend $argv
+echo "Running Noesis Hub..."
+./bin/noesis_hub $argv

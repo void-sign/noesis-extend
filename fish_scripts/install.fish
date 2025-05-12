@@ -1,7 +1,7 @@
 #!/bin/fish
 
-echo "Noesis Extend Installation Script"
-echo "================================"
+echo "Noesis Hub Installation Script"
+echo "==============================="
 echo 
 
 # Check for Noesis Core shared library
@@ -78,8 +78,8 @@ end
 # Clean any previous builds
 make clean
 
-# Build Noesis-Extend
-echo "Building Noesis Extend..."
+# Build Noesis Hub
+echo "Building Noesis Hub..."
 if set -q BUILD_STANDALONE
     echo "Building in standalone mode (Noesis Core integration disabled)"
     make standalone
@@ -101,7 +101,7 @@ if test $status -ne 0
     echo "ERROR: Build failed."
     exit 1
 end
-echo "✓ Noesis Extend built successfully"
+echo "✓ Noesis Hub built successfully"
 
 # Run tests
 echo "Running tests..."
@@ -115,12 +115,12 @@ end
 echo
 echo "Installation complete!"
 echo "======================"
-echo "You can now run Noesis Extend with:"
+echo "You can now run Noesis Hub with:"
 echo "  ./run.fish"
 echo
 if set -q BUILD_STANDALONE
-    echo "Note: Running in standalone mode. Some features that require Noesis Core will be disabled."
+    echo "Note: Running in standalone mode. Integration with Noesis Core disabled."
 else
-    echo "Note: Integrated with Noesis Core for full functionality."
+    echo "Note: Integration with Noesis Core enabled via API interface."
 end
 echo

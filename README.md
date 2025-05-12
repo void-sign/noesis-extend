@@ -1,23 +1,25 @@
-# Noesis-Extend v1.0.0
+# Noesis Hub v1.0.0
 
-This repository contains the extensions and tools for the Noesis synthetic consciousness system, focusing on quantum computing capabilities and specialized tools
+This repository serves as a hub for connecting various platforms and systems to the Noesis synthetic consciousness system.
 
 ## Overview
 
-Noesis-Extend builds upon the Noesis Core to provide additional functionality for quantum computing, field theory, and specialized tools. This repository uses the MIT license (more permissive than the core's license) to facilitate integration with external libraries and tools.
+Noesis Hub is a platform connector hub that provides standardized interfaces for integrating different platforms with Noesis Core. This repository uses the MIT license (more permissive than the core's license) to facilitate integration with external libraries and systems. All quantum functionality has been moved back to the Noesis Core repository.
 
-## Repository Split
+## Repository Organization
 
-As of v1.0.0, Noesis has been split into two separate repositories:
-- **Noesis Core**: https://github.com/void-sign/noesis (Custom Noesis License)
-- **Noesis-Extend**: https://github.com/void-sign/noesis-extend (MIT License)
+As of v1.0.0, Noesis has been reorganized:
+- **Noesis Core**: https://github.com/void-sign/noesis (Noesis License)
+  - Now includes all quantum functionality previously in Noesis Hub
+- **Noesis Hub**: https://github.com/void-sign/noesis-hub (MIT License)
+  - Now focused on being a connector hub for different platforms
 
-This separation allows for clearer licensing boundaries and more flexible development.
+This organization allows Noesis Core to maintain all core functionality including quantum components, while Noesis Hub serves as a flexible integration point for various external platforms.
 
 ## Structure
 
 ```
-noesis-extend/
+noesis-hub/
 ├── LICENSE (MIT License)
 ├── README.md
 ├── data/
@@ -64,7 +66,7 @@ noesis-extend/
 set -gx NOESIS_CORE_PATH /path/to/noesis
 ```
 
-2. Install Noesis-Extend:
+2. Install Noesis Hub:
 
 ```bash
 ./install.fish
@@ -78,7 +80,7 @@ If you don't have Noesis Core installed, our helper script can install it for yo
 
 ## Running
 
-To run Noesis-Extend:
+To run Noesis Hub:
 
 ```bash
 ./run.fish

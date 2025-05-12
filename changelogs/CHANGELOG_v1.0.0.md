@@ -1,10 +1,10 @@
-# CHANGELOG for Noesis-Extend v1.0.0
+# CHANGELOG for Noesis Hub v1.0.0
 
 ## Overview
-This is the first release of Noesis-Extend as a separate and independent extension system for Noesis Core, extracted from the original Noesis project's `noesis-extensions` directory. This change was made to provide a more permissive MIT license, clearer separation of concerns, and greater independence for extension development.
+This is the first release of Noesis Hub as a separate and independent connector hub for Noesis Core, extracted from the original Noesis project's `noesis-extensions` directory. This change was made to provide a more permissive MIT license, clearer separation of concerns, and greater independence for platform integration development.
 
 ## Major Changes
-- Established Noesis-Extend as an independent extension system with its own repository
+- Established Noesis Hub as an independent connector system with its own repository
 - Moved all extensions from `noesis-extensions` directory to this dedicated repository
 - Created clean API boundary (noesis_api.h) for communication with Noesis Core
 - Updated build system to work with separate repositories
@@ -43,7 +43,7 @@ This is the first release of Noesis-Extend as a separate and independent extensi
 - Updated README.md to explain the relationship with Noesis Core
 - Added installation instructions with multiple setup options
 - Added clear explanation of the repository split and licensing differences
-- Documented the independent nature of Noesis-Extend as a separate extension system
+- Documented the independent nature of Noesis Hub as a separate connector system
 - Added ECOSYSTEM.md documenting the relationship between Noesis project components
 - Added CONTRIBUTING.md with guidelines for contributors
 - Added comprehensive docheader comments to quantum source files
