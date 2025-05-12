@@ -1,6 +1,6 @@
 # Noesis-Extend v1.0.0
 
-This repository contains the extensions and tools for the Noesis synthetic consciousness system, focusing on quantum computing capabilities and specialized tools.
+This repository contains the extensions and tools for the Noesis synthetic consciousness system, focusing on quantum computing capabilities and specialized tools
 
 ## Overview
 

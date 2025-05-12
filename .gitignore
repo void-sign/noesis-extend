@@ -50,3 +50,56 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# VS Code files
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# Build and output directories
+bin/
+lib/
+object/
+build/
+dist/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.cache
+
+# OS specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor temp files
+*~
+*.swp
+*.swo
+
+# C/C++ specific
+# Compiled binaries
+*.out
+*.app
+*.exe
+noesis_extend
+noesis_extend_tests
+
+# Debug files (already has some, but adding more)
+*.dSYM/
+*.su
+*.idb
+*.pdb
+*.dbg
+
+# Dependency files
+*.d
+
+# Core dump files
+core

@@ -25,7 +25,7 @@ end
 if not test -d "$NOESIS_HOME"
     echo "ERROR: Noesis Core directory not found at $NOESIS_HOME"
     echo "Please set the NOESIS_CORE_PATH environment variable to the correct location"
-    echo "or install Noesis Core using ./scripts/install_dependency.fish"
+    echo "or install Noesis Core using ./install_dependency.fish"
     exit 1
 end
 
