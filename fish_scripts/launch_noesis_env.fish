@@ -1,14 +1,14 @@
 #!/bin/fish
 
 # launch_noesis_env.fish - Setup environment for working with both repositories
-# This script helps developers work with both Noesis Core and Noesis-Extend
+# This script helps developers work with both Noesis Core and Noesis Hub
 
 if test (count $argv) -eq 0
     echo "Usage: ./launch_noesis_env.fish [core_path] [extend_path]"
     echo
     echo "Arguments:"
     echo "  core_path   - Path to Noesis Core repository (default: ../noesis)"
-    echo "  extend_path - Path to Noesis-Extend repository (default: ../noesis-extend)"
+    echo "  extend_path - Path to Noesis Hub repository (default: ../noesis-hub)"
     echo
     echo "This script will:"
     echo "  1. Set up environment variables for cross-repository development"
@@ -19,7 +19,7 @@ end
 
 # Default paths
 set -l CORE_PATH "../noesis"
-set -l EXTEND_PATH "../noesis-extend"
+set -l EXTEND_PATH "../noesis-hub"
 
 # Use arguments if provided
 if test (count $argv) -ge 1
@@ -41,7 +41,7 @@ if not test -d $CORE_PATH
 end
 
 if not test -d $EXTEND_PATH
-    echo "Error: Noesis-Extend directory not found at $EXTEND_PATH"
+    echo "Error: Noesis Hub directory not found at $EXTEND_PATH"
     exit 1
 end
 

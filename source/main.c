@@ -18,7 +18,7 @@
 #define MAX_BUFFER 4096
 
 void print_banner() {
-    printf("Noesis-Extend v%s\n", VERSION);
+    printf("Noesis Hub v%s\n", VERSION);
     printf("================================\n");
     
     #ifdef STANDALONE_MODE
@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(input, "help") == 0) {
             print_help();
         } else if (strcmp(input, "version") == 0) {
-            printf("Noesis-Extend v%s\n", VERSION);
+            printf("Noesis Hub v%s\n", VERSION);
         } else if (strcmp(input, "quantum") == 0) {
             printf("Entering quantum circuit mode...\n");
             // Additional implementation here
@@ -94,6 +94,6 @@ int main(int argc, char *argv[]) {
         }
     }
     
-    printf("Exiting Noesis-Extend\n");
+    printf("Exiting Noesis Hub\n");
     return 0;
 }

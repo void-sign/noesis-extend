@@ -119,7 +119,7 @@ clean:
 
 # Install target
 install: all
-	@echo "Noesis-Extend has been built and installed to the bin directory"
+	@echo "Noesis Hub has been built and installed to the bin directory"
 	@echo "You can run it with: ./run.fish"
 
 .PHONY: all setup test clean install standalone

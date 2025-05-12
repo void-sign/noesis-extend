@@ -1,6 +1,6 @@
 #!/bin/bash
 # This script creates links to the Noesis Core library
-# for use by Noesis-Extend
+# for use by Noesis Hub
 
 # Check for Noesis Core path
 if [ -n "$NOESIS_LIBRARY_PATH" ]; then

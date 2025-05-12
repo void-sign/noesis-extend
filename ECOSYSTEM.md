@@ -28,10 +28,10 @@ An independent connector hub for the Noesis ecosystem, featuring:
 
 ## Independent Extension Architecture
 
-Noesis-Extend now follows an independent extension architecture:
+Noesis Hub now follows an independent extension architecture:
 
 1. **Optional Core Integration:**
-   - Noesis-Extend can operate independently or integrate with Noesis Core
+   - Noesis Hub can operate independently or integrate with Noesis Core
    - Integration is handled through a plugin architecture
    - No hard dependency on Noesis Core
 
@@ -48,16 +48,16 @@ Noesis-Extend now follows an independent extension architecture:
 ## Choosing the Right Components
 
 - **Noesis Core:** For core consciousness simulation functionality
-- **Noesis-Extend:** For quantum computing and field theory extensions (can be used independently)
+- **Noesis Hub:** For quantum computing and field theory extensions (can be used independently)
 - **Combined Use:** For maximum functionality with both components working together
 - **Custom Integration:** Mix and match with your own components using the extension API
 
 ## Integration Methods
 
-Noesis-Extend offers multiple integration options:
+Noesis Hub offers multiple integration options:
 
 1. **Standalone Mode:**
-   - Use Noesis-Extend completely independently
+   - Use Noesis Hub completely independently
    - All quantum functionality works without Core
    - Access through standard APIs defined in `include/quantum`
 

@@ -1,6 +1,6 @@
 #!/bin/fish
 # This script creates links to the Noesis Core library
-# for use by Noesis-Extend
+# for use by Noesis Hub
 
 # Check for Noesis Core path
 if set -q NOESIS_LIBRARY_PATH
@@ -83,4 +83,4 @@ if test -d "$NOESIS_HOME/include/utils"
     ln -sf "$NOESIS_HOME/include/utils" include/utils
 end
 
-echo "Core library linked to Noesis-Extend successfully"
+echo "Core library linked to Noesis Hub successfully"

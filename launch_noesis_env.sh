@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # launch_noesis_env.sh - Setup environment for working with both repositories
-# This script helps developers work with both Noesis Core and Noesis-Extend
+# This script helps developers work with both Noesis Core and Noesis Hub
 
 if [ $# -eq 0 ]; then
     echo "Usage: ./launch_noesis_env.sh [core_path] [extend_path]"
     echo
     echo "Arguments:"
     echo "  core_path   - Path to Noesis Core repository (default: ../noesis)"
-    echo "  extend_path - Path to Noesis-Extend repository (default: ../noesis-extend)"
+    echo "  extend_path - Path to Noesis Hub repository (default: ../noesis-hub)"
     echo
     echo "This script will:"
     echo "  1. Set up environment variables for cross-repository development"
@@ -19,7 +19,7 @@ fi
 
 # Default paths
 CORE_PATH="../noesis"
-EXTEND_PATH="../noesis-extend"
+EXTEND_PATH="../noesis-hub"
 
 # Use arguments if provided
 if [ $# -ge 1 ]; then
@@ -41,7 +41,7 @@ if [ ! -d "$CORE_PATH" ]; then
 fi
 
 if [ ! -d "$EXTEND_PATH" ]; then
-    echo "Error: Noesis-Extend directory not found at $EXTEND_PATH"
+    echo "Error: Noesis Hub directory not found at $EXTEND_PATH"
     exit 1
 fi
 

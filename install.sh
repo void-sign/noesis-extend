@@ -92,7 +92,7 @@ if [ $NOESIS_FOUND -eq 1 ]; then
 fi
 
 # Build the project
-echo "Building Noesis-Extend..."
+echo "Building Noesis Hub..."
 make clean
 make
 
@@ -101,5 +101,5 @@ if [ $? -ne 0 ]; then
     exit 1
 else
     echo "Build completed successfully!"
-    echo "You can now run Noesis-Extend with: ./run.sh"
+    echo "You can now run Noesis Hub with: ./run.sh"
 fi
