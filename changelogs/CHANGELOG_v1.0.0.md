@@ -20,23 +20,43 @@ This is the first release of Noesis-Extend as a separate and independent extensi
 - Implemented platform-independent dynamic library loading mechanism
 - Created standalone mode option for independent operation
 - Added quantum computing backend interface system
+  - IBM quantum backend implementation (`backend_ibm.c`)
+  - Stub backend for testing and development (`backend_stub.c`)
+  - Quantum compiler infrastructure (`compiler.c`)
+  - Export capabilities to QASM and JSON formats (`export_qasm.c`, `export_json.c`)
+  - Quantum field simulation capabilities (`quantum_field.c`)
+- Added quantum-specific tools
+  - Quantum circuit builder tool (`qbuild.c`)
+  - Quantum circuit execution tool (`qrun.c`) 
 - Added both `.sh` (default) and `.fish` (alternative) script options for better shell compatibility
+  - Fish shell support for all core scripts (`install.fish`, `run.fish`, etc.)
+  - Dedicated `fish_scripts` directory for Fish shell variants
+- Added environment setup script (`launch_noesis_env.sh`/`.fish`)
 
 ## Build System
 - Updated Makefile to reference external Noesis Core repository
 - Executable name changed to `noesis_extend`
 - Added support for both linked and dynamically loaded operation modes
+- Added dependency installation script (`install_dependency.sh`/`.fish`)
 
 ## Documentation
 - Updated README.md to explain the relationship with Noesis Core
 - Added installation instructions with multiple setup options
 - Added clear explanation of the repository split and licensing differences
 - Documented the independent nature of Noesis-Extend as a separate extension system
+- Added ECOSYSTEM.md documenting the relationship between Noesis project components
+- Added CONTRIBUTING.md with guidelines for contributors
+- Added comprehensive docheader comments to quantum source files
 
 ## API Changes
 - Created clean API boundary through noesis_api.h
 - Implemented standardized function pointer types for core functions
 - Added platform-independent dynamic library handling
+
+## Testing
+- Added quantum logic tests (`qlogic_tests.c`) 
+- Added test-specific make target (`make test`)
+- Implemented stub backend for testing without quantum hardware
 
 ## Date
 May 12, 2025
