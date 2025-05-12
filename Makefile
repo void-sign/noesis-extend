@@ -4,8 +4,6 @@
 CC = gcc
 
 # Directories
-QUANTUM_DIR = source/quantum
-FIELD_DIR = source/quantum/field
 TOOLS_DIR = source/tools
 TEST_DIR = tests
 OBJ_DIR = object
@@ -24,9 +22,7 @@ else
 endif
 
 # Source Files
-SRCS = $(wildcard $(QUANTUM_DIR)/*.c) \
-       $(wildcard $(FIELD_DIR)/*.c) \
-       $(wildcard $(TOOLS_DIR)/*.c) \
+SRCS = $(wildcard $(TOOLS_DIR)/*.c) \
        source/noesis_api.c \
        source/main.c
 
@@ -34,9 +30,7 @@ SRCS = $(wildcard $(QUANTUM_DIR)/*.c) \
 TEST_SRCS = $(wildcard $(TEST_DIR)/*.c)
 
 # Object Files
-OBJS = $(patsubst $(QUANTUM_DIR)/%.c, $(OBJ_DIR)/quantum/%.o, $(filter $(QUANTUM_DIR)/%, $(SRCS))) \
-       $(patsubst $(FIELD_DIR)/%.c, $(OBJ_DIR)/quantum/field/%.o, $(filter $(FIELD_DIR)/%, $(SRCS))) \
-       $(patsubst $(TOOLS_DIR)/%.c, $(OBJ_DIR)/tools/%.o, $(filter $(TOOLS_DIR)/%, $(SRCS))) \
+OBJS = $(patsubst $(TOOLS_DIR)/%.c, $(OBJ_DIR)/tools/%.o, $(filter $(TOOLS_DIR)/%, $(SRCS))) \
        $(OBJ_DIR)/noesis_api.o \
        $(OBJ_DIR)/main.o
 
@@ -70,7 +64,7 @@ standalone:
 
 # Setup directories
 setup:
-	@mkdir -p $(BIN_DIR) $(LIB_DIR) $(OBJ_DIR)/quantum/field $(OBJ_DIR)/tools $(OBJ_DIR)/tests
+	@mkdir -p $(BIN_DIR) $(LIB_DIR) $(OBJ_DIR)/tools $(OBJ_DIR)/tests
 
 # Link main target
 $(TARGET): $(OBJS)
@@ -88,14 +82,6 @@ $(OBJ_DIR)/main.o: source/main.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Rules to create object files in the object directory
-$(OBJ_DIR)/quantum/%.o: $(QUANTUM_DIR)/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR)/quantum/field/%.o: $(FIELD_DIR)/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
-
 $(OBJ_DIR)/tools/%.o: $(TOOLS_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@

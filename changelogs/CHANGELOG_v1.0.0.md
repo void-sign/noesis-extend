@@ -12,6 +12,7 @@ This is the first release of Noesis Hub as a separate and independent connector 
 - Changed license to MIT License (from the original Noesis License)
 - Added improved cross-repository dependency management
 - Implemented dynamic loading of Noesis Core library
+- Moved all quantum-related functionality back to Noesis Core repository
 
 ## New Features
 - Added `link_libraries.sh` for flexible cross-repository integration
@@ -19,15 +20,6 @@ This is the first release of Noesis Hub as a separate and independent connector 
 - Added `run.sh` for simpler execution
 - Implemented platform-independent dynamic library loading mechanism
 - Created standalone mode option for independent operation
-- Added quantum computing backend interface system
-  - IBM quantum backend implementation (`backend_ibm.c`)
-  - Stub backend for testing and development (`backend_stub.c`)
-  - Quantum compiler infrastructure (`compiler.c`)
-  - Export capabilities to QASM and JSON formats (`export_qasm.c`, `export_json.c`)
-  - Quantum field simulation capabilities (`quantum_field.c`)
-- Added quantum-specific tools
-  - Quantum circuit builder tool (`qbuild.c`)
-  - Quantum circuit execution tool (`qrun.c`) 
 - Added both `.sh` (default) and `.fish` (alternative) script options for better shell compatibility
   - Fish shell support for all core scripts (`install.fish`, `run.fish`, etc.)
   - Dedicated `fish_scripts` directory for Fish shell variants
@@ -54,9 +46,7 @@ This is the first release of Noesis Hub as a separate and independent connector 
 - Added platform-independent dynamic library handling
 
 ## Testing
-- Added quantum logic tests (`qlogic_tests.c`) 
 - Added test-specific make target (`make test`)
-- Implemented stub backend for testing without quantum hardware
 
 ## Date
 May 12, 2025

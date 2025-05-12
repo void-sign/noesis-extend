@@ -6,9 +6,6 @@
  * in the Software under the following conditions as specified in the Noesis License.
  */
 
-#include "../include/quantum/quantum.h"
-#include "../include/quantum/export.h"
-#include "../include/quantum/backend.h"
 #include "../include/noesis_api.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,9 +29,9 @@ void print_help() {
     printf("Available commands:\n");
     printf("  help       - Show this help message\n");
     printf("  version    - Show version information\n");
-    printf("  quantum    - Enter quantum circuit mode\n");
-    printf("  run        - Run the current quantum circuit\n");
-    printf("  export     - Export the current circuit to QASM\n");
+    printf("  connect    - Connect to a platform\n");
+    printf("  list       - List available platforms\n");
+    printf("  status     - Check connection status\n");
     printf("  exit       - Exit the program\n");
     printf("\n");
 }
@@ -42,14 +39,11 @@ void print_help() {
 int main(int argc, char *argv[]) {
     print_banner();
     
-    // Initialize quantum subsystem
-    q_init();
-    
     // Process command-line arguments
     if (argc > 1) {
         // Handle command-line mode
         if (strcmp(argv[1], "run") == 0) {
-            printf("Running quantum circuit in batch mode...\n");
+            printf("Running in batch mode...\n");
             // Additional implementation here
             return 0;
         }
@@ -77,19 +71,18 @@ int main(int argc, char *argv[]) {
             print_help();
         } else if (strcmp(input, "version") == 0) {
             printf("Noesis Hub v%s\n", VERSION);
-        } else if (strcmp(input, "quantum") == 0) {
-            printf("Entering quantum circuit mode...\n");
-            // Additional implementation here
-        } else if (strcmp(input, "run") == 0) {
-            printf("Running quantum circuit...\n");
-            backend_run_stub(q_get_circuit());
-        } else if (strcmp(input, "export") == 0) {
-            char buffer[MAX_BUFFER];
-            export_qasm(buffer, MAX_BUFFER, q_get_circuit());
-            printf("Circuit QASM:\n%s\n", buffer);
+        } else if (strcmp(input, "connect") == 0) {
+            printf("Connect to a platform...\n");
+            // Implementation for platform connection
+        } else if (strcmp(input, "list") == 0) {
+            printf("Available platforms:\n");
+            // List available platforms
+        } else if (strcmp(input, "status") == 0) {
+            printf("Checking connection status...\n");
+            // Check connection status
         } else {
             // Try to process with Noesis Core if available
-            q_process_with_noesis(input, output, MAX_BUFFER);
+            process_with_noesis(input, output, MAX_BUFFER);
             printf("%s\n", output);
         }
     }
