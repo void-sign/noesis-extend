@@ -24,7 +24,6 @@ noesis-hub/
 ├── LICENSE (MIT License)
 ├── Makefile
 ├── README.md
-├── bin/
 ├── changelogs/
 │   └── CHANGELOG_v1.0.0.md
 ├── data/
@@ -36,8 +35,11 @@ noesis-hub/
 │   └── run.fish
 ├── include/
 │   └── noesis_api.h
-├── lib/
-├── object/
+├── install.sh
+├── install_dependency.sh
+├── launch_noesis_env.sh
+├── link_libraries.sh
+├── run.sh
 ├── source/
 │   ├── main.c
 │   ├── noesis_api.c
@@ -49,37 +51,94 @@ noesis-hub/
 
 ### Prerequisites
 
-- Noesis Core installed or available
-- GCC compiler
-- Make
-- Fish shell (recommended)
+- **Noesis Core**: Either installed or path available (see installation steps)
+- **Compiler**: GCC 6.0 or newer
+- **Build System**: Make 3.81 or newer
+- **Shell Environment**:
+  - Bash (default): Required for the primary scripts
+  - Fish (alternative): Optional for using the fish_scripts directory
+- **Development Tools**: 
+  - git (for cloning repositories)
+  - pkg-config (for managing library flags)
+  - cmake (version 3.10 or newer, for building dependencies)
+- **Libraries**:
+  - libssl-dev (for secure connections)
+  - zlib1g-dev (for compression functionality)
 
 ### Steps
 
-1. First, ensure you have Noesis Core installed or set `NOESIS_CORE_PATH` to point to your Noesis Core installation:
+1. **Set Up Noesis Core**
+   
+   Either install Noesis Core first, or set the environment variable to point to your existing installation:
 
-```bash
-set -gx NOESIS_CORE_PATH /path/to/noesis
-```
+   For Bash (default):
+   ```bash
+   export NOESIS_CORE_PATH=/path/to/noesis
+   ```
 
-2. Install Noesis Hub:
+   For Fish (alternative):
+   ```bash
+   set -gx NOESIS_CORE_PATH /path/to/noesis
+   ```
 
-```bash
-./install.fish
-```
+2. **Install Noesis Hub**
 
-If you don't have Noesis Core installed, our helper script can install it for you:
+   Using Bash (default):
+   ```bash
+   ./install.sh
+   ```
 
-```bash
-./scripts/install_dependency.fish
-```
+   Using Fish (alternative):
+   ```bash
+   ./fish_scripts/install.fish
+   ```
+
+3. **Install Noesis Core (if not already installed)**
+
+   If you don't have Noesis Core installed, you can use our helper scripts:
+
+   Using Bash (default):
+   ```bash
+   ./install_dependency.sh
+   ```
+
+   Using Fish (alternative):
+   ```bash
+   ./fish_scripts/install_dependency.fish
+   ```
+
+4. **Link Libraries with Core**
+
+   This step ensures proper linkage between Noesis Hub and Core:
+   
+   Using Bash (default):
+   ```bash
+   ./link_libraries.sh
+   ```
+
+   Using Fish (alternative):
+   ```bash
+   ./fish_scripts/link_libraries.fish
+   ```
 
 ## Running
 
 To run Noesis Hub:
 
+Using Bash (default):
 ```bash
-./run.fish
+./run.sh
+```
+
+Using Fish (alternative):
+```bash
+./fish_scripts/run.fish
+```
+
+To run in a specialized Noesis environment:
+
+```bash
+./launch_noesis_env.sh
 ```
 
 ## License
