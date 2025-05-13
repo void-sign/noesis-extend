@@ -26,25 +26,33 @@ noesis-hub/
 ├── README.md
 ├── changelogs/
 │   └── CHANGELOG_v1.0.0.md
-├── data/
-├── fish_scripts/
-│   ├── install.fish
-│   ├── install_dependency.fish
-│   ├── launch_noesis_env.fish
-│   ├── link_libraries.fish
-│   └── run.fish
+├── docs/
+│   ├── changelogs/
+│   └── guides/
 ├── include/
 │   └── noesis_api.h
-├── install.sh
-├── install_dependency.sh
-├── launch_noesis_env.sh
-├── link_libraries.sh
-├── run.sh
-├── source/
-│   ├── main.c
-│   ├── noesis_api.c
+├── scripts/
+│   ├── bash/
+│   │   ├── add_external_lib.sh
+│   │   ├── install.sh
+│   │   ├── install_dependency.sh
+│   │   ├── launch_noesis_env.sh
+│   │   ├── link_libraries.sh
+│   │   └── run.sh
+│   └── fish/
+│       ├── add_external_lib.fish
+│       ├── install.fish
+│       ├── install_dependency.fish
+│       ├── launch_noesis_env.fish
+│       ├── link_libraries.fish
+│       └── run.fish
+├── src/
+│   ├── core/
+│   ├── platforms/
 │   └── tools/
-└── tests/
+├── tests/
+├── run.sh
+└── run.fish
 ```
 
 ## Installation
@@ -56,7 +64,7 @@ noesis-hub/
 - **Build System**: Make 3.81 or newer
 - **Shell Environment**:
   - Bash (default): Required for the primary scripts
-  - Fish (alternative): Optional for using the fish_scripts directory
+  - Fish (alternative): Optional for using the fish shell scripts
 - **Development Tools**: 
   - git (for cloning repositories)
   - pkg-config (for managing library flags)
@@ -85,12 +93,12 @@ noesis-hub/
 
    Using Bash (default):
    ```bash
-   ./install.sh
+   ./scripts/bash/install.sh
    ```
 
    Using Fish (alternative):
    ```bash
-   ./fish_scripts/install.fish
+   ./scripts/fish/install.fish
    ```
 
 3. **Install Noesis Core (if not already installed)**
@@ -99,12 +107,12 @@ noesis-hub/
 
    Using Bash (default):
    ```bash
-   ./install_dependency.sh
+   ./scripts/bash/install_dependency.sh
    ```
 
    Using Fish (alternative):
    ```bash
-   ./fish_scripts/install_dependency.fish
+   ./scripts/fish/install_dependency.fish
    ```
 
 4. **Link Libraries with Core**
@@ -113,32 +121,28 @@ noesis-hub/
    
    Using Bash (default):
    ```bash
-   ./link_libraries.sh
+   ./scripts/bash/link_libraries.sh
    ```
 
    Using Fish (alternative):
    ```bash
-   ./fish_scripts/link_libraries.fish
+   ./scripts/fish/link_libraries.fish
    ```
 
 ## Running
 
 To run Noesis Hub:
 
-Using Bash (default):
 ```bash
-./run.sh
-```
-
-Using Fish (alternative):
-```bash
-./fish_scripts/run.fish
+./run.sh      # For Bash users
+./run.fish    # For Fish shell users
 ```
 
 To run in a specialized Noesis environment:
 
 ```bash
-./launch_noesis_env.sh
+./scripts/bash/launch_noesis_env.sh   # For Bash users
+./scripts/fish/launch_noesis_env.fish # For Fish shell users
 ```
 
 ## License

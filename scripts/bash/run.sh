@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Run script for Noesis Hub
+# Run script for Noesis Hub (restructured)
 
 # Check if the executable exists
 if [ ! -f "./bin/noesis_hub" ]; then
     echo "Noesis Hub executable not found. Building first..."
-    ./install.sh
+    ./scripts/bash/install.sh
     if [ $? -ne 0 ]; then
         echo "Build failed. Please check the error messages above."
         exit 1

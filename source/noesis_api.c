@@ -31,10 +31,16 @@ typedef void* lib_handle_t;
 #define CLOSE_LIBRARY(handle) dlclose(handle)
 #endif
 
-// Static handle storage for cleanup
+// Static handle storage for cleanup and reuse
 static lib_handle_t global_lib_handle = NULL;
+static NoesisAPI* cached_api = NULL;
 
 NoesisAPI* load_noesis_api(const char* lib_path) {
+    // Return cached API if already loaded
+    if (cached_api && global_lib_handle) {
+        return cached_api;
+    }
+    
     if (!lib_path) {
         fprintf(stderr, "Error: No library path provided\n");
         return NULL;
@@ -44,6 +50,7 @@ NoesisAPI* load_noesis_api(const char* lib_path) {
     if (global_lib_handle) {
         CLOSE_LIBRARY(global_lib_handle);
         global_lib_handle = NULL;
+        cached_api = NULL;
     }
     
     // Load the dynamic library
@@ -79,8 +86,9 @@ NoesisAPI* load_noesis_api(const char* lib_path) {
         return NULL;
     }
     
-    // Store handle for cleanup
+    // Store handle and API for cleanup and reuse
     global_lib_handle = handle;
+    cached_api = api;
     
     return api;
 }
@@ -93,5 +101,6 @@ void unload_noesis_api(NoesisAPI* api) {
     if (global_lib_handle) {
         CLOSE_LIBRARY(global_lib_handle);
         global_lib_handle = NULL;
+        cached_api = NULL;
     }
 }

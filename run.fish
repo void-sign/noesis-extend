@@ -1,7 +1,7 @@
 #!/bin/fish
 
 # Main run script for Noesis Hub (restructured)
-# This script serves as an entry point that uses the appropriate script based on shell
+# This script serves as an entry point that uses the new script structure
 
-# Always run the Fish version
+# Call the implementation in the scripts directory
 ./scripts/fish/run.fish $argv

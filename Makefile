@@ -1,4 +1,4 @@
-# Noesis Hub Makefile
+# Noesis Hub Makefile (Restructured)
 
 # Compiler
 CC = gcc
@@ -49,7 +49,7 @@ CFLAGS = -Wall -Wextra -std=c99
 LDFLAGS = -ldl
 
 # Add include directory to the compiler's include path
-CFLAGS += -Iinclude -I$(CORE_LIB_DIR)/include
+CFLAGS += -I$(INCLUDE_DIR) -I$(CORE_LIB_DIR)/include
 
 # Check if we're building standalone
 ifdef BUILD_STANDALONE
@@ -113,6 +113,6 @@ clean:
 # Install target
 install: all
 	@echo "Noesis Hub has been built and installed to the bin directory"
-	@echo "You can run it with: ./run.fish"
+	@echo "You can run it with: ./run.sh or ./run.fish"
 
 .PHONY: all setup test clean install standalone
