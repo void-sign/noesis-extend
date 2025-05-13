@@ -31,16 +31,22 @@ noesis-hub/
 │   └── guides/
 ├── include/
 │   └── noesis_api.h
+├── run.sh                # Central control script for bash users
+├── run.fish              # Central control script for fish users
 ├── scripts/
-│   ├── bash/
+│   ├── bash/             # Implementation scripts for bash
 │   │   ├── add_external_lib.sh
+│   │   ├── cleanup_repo.sh
+│   │   ├── cleanup_structure.sh
 │   │   ├── install.sh
 │   │   ├── install_dependency.sh
 │   │   ├── launch_noesis_env.sh
 │   │   ├── link_libraries.sh
 │   │   └── run.sh
-│   └── fish/
+│   └── fish/             # Implementation scripts for fish
 │       ├── add_external_lib.fish
+│       ├── cleanup_structure.fish
+│       ├── cleanup_structure_aggressive.fish
 │       ├── install.fish
 │       ├── install_dependency.fish
 │       ├── launch_noesis_env.fish
@@ -91,7 +97,17 @@ noesis-hub/
 
 2. **Install Noesis Hub**
 
-   Using Bash (default):
+   Using Bash:
+   ```bash
+   ./run.sh install
+   ```
+
+   Using Fish:
+   ```fish
+   ./run.fish install
+   ```
+
+   Or with the legacy scripts:
    ```bash
    ./scripts/bash/install.sh
    ```
@@ -144,6 +160,52 @@ To run in a specialized Noesis environment:
 ./scripts/bash/launch_noesis_env.sh   # For Bash users
 ./scripts/fish/launch_noesis_env.fish # For Fish shell users
 ```
+
+## Using the Control Scripts
+
+Noesis Hub provides central control scripts (`run.sh` and `run.fish`) as user-friendly ways to execute various operations without having to remember specific script paths.
+
+### Command Line Usage
+
+You can execute specific scripts by supplying the command name as an argument:
+
+For Bash users:
+```bash
+./run.sh [command] [arguments]
+```
+
+For Fish users:
+```fish
+./run.fish [command] [arguments]
+```
+
+Available commands:
+- `run` - Run Noesis Hub
+- `install` - Install Noesis Hub
+- `link_libraries` - Link with Core Libraries
+- `install_dep` - Install Core Dependencies
+- `add_lib` - Add External Library
+- `launch_env` - Launch Noesis Environment 
+- `cleanup_struct` - Clean up Structure
+- `cleanup_repo` - Clean up Repository (Bash only)
+- `cleanup_aggr` - Clean up Structure Aggressively (Fish only)
+- `help` - Show the command menu
+
+### Interactive Menu
+
+If you run the control scripts without arguments, they will display an interactive menu:
+
+```bash
+./run.sh
+```
+
+or 
+
+```fish
+./run.fish
+```
+
+This will display a numbered menu where you can select the operation you want to perform.
 
 ## License
 
