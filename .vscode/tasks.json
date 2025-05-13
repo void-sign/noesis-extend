@@ -4,7 +4,7 @@
     {
       "label": "Build All",
       "type": "shell",
-      "command": "./install.fish",
+      "command": "./run.fish install",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -33,7 +33,7 @@
     {
       "label": "Run Extensions",
       "type": "shell",
-      "command": "./run.fish",
+      "command": "./run.fish run",
       "group": {
         "kind": "test",
         "isDefault": true
@@ -56,7 +56,7 @@
     {
       "label": "Link with Core",
       "type": "shell",
-      "command": "./link_libraries.fish",
+      "command": "./run.fish link_libraries",
       "presentation": {
         "reveal": "always",
         "panel": "new"
@@ -65,7 +65,7 @@
     {
       "label": "Install Core Dependency",
       "type": "shell",
-      "command": "./scripts/install_dependency.fish",
+      "command": "./run.fish install_dep",
       "presentation": {
         "reveal": "always",
         "panel": "new"

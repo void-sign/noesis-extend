@@ -1,11 +1,11 @@
-#!/bin/fish
+#!/usr/local/bin/fish
 
 # Run script for Noesis Hub
 
 # Check if the executable exists
 if not test -f "./bin/noesis_hub"
     echo "Noesis Hub executable not found. Building first..."
-    ./install.fish
+    ./scripts/fish/install.fish
     if test $status -ne 0
         echo "Build failed. Please check the error messages above."
         exit 1
