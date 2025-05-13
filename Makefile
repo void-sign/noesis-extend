@@ -4,11 +4,15 @@
 CC = gcc
 
 # Directories
-TOOLS_DIR = source/tools
+SRC_DIR = src
+TOOLS_DIR = $(SRC_DIR)/tools
+PLATFORMS_DIR = $(SRC_DIR)/platforms
+CORE_DIR = $(SRC_DIR)/core
 TEST_DIR = tests
-OBJ_DIR = object
+OBJ_DIR = build/obj
 LIB_DIR = lib
 BIN_DIR = bin
+INCLUDE_DIR = include
 
 # Check for Noesis Core path (use environment variable or default)
 ifndef NOESIS_CORE_PATH
@@ -23,16 +27,15 @@ endif
 
 # Source Files
 SRCS = $(wildcard $(TOOLS_DIR)/*.c) \
-       source/noesis_api.c \
-       source/main.c
+       $(wildcard $(PLATFORMS_DIR)/*.c) \
+       $(CORE_DIR)/noesis_api.c \
+       $(CORE_DIR)/main.c
 
 # Test Files
 TEST_SRCS = $(wildcard $(TEST_DIR)/*.c)
 
 # Object Files
-OBJS = $(patsubst $(TOOLS_DIR)/%.c, $(OBJ_DIR)/tools/%.o, $(filter $(TOOLS_DIR)/%, $(SRCS))) \
-       $(OBJ_DIR)/noesis_api.o \
-       $(OBJ_DIR)/main.o
+OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 # Test Object Files
 TEST_OBJS = $(patsubst $(TEST_DIR)/%.c, $(OBJ_DIR)/tests/%.o, $(TEST_SRCS))
@@ -64,7 +67,7 @@ standalone:
 
 # Setup directories
 setup:
-	@mkdir -p $(BIN_DIR) $(LIB_DIR) $(OBJ_DIR)/tools $(OBJ_DIR)/tests
+	@mkdir -p $(BIN_DIR) $(LIB_DIR) $(OBJ_DIR)/tools $(OBJ_DIR)/core $(OBJ_DIR)/platforms $(OBJ_DIR)/tests
 
 # Link main target
 $(TARGET): $(OBJS)
@@ -72,17 +75,21 @@ $(TARGET): $(OBJS)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(TARGET)
 
 # Rule for API implementation
-$(OBJ_DIR)/noesis_api.o: source/noesis_api.c
+$(OBJ_DIR)/core/noesis_api.o: $(CORE_DIR)/noesis_api.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Rule for main file
-$(OBJ_DIR)/main.o: source/main.c
+$(OBJ_DIR)/core/main.o: $(CORE_DIR)/main.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Rules to create object files in the object directory
 $(OBJ_DIR)/tools/%.o: $(TOOLS_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/platforms/%.o: $(PLATFORMS_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -101,7 +108,7 @@ $(OBJ_DIR)/tests/%.o: $(TEST_DIR)/%.c
 # Clean build artifacts
 clean:
 	rm -rf $(OBJ_DIR)/*
-	rm -f $(BIN_DIR)/noesis_extend $(BIN_DIR)/noesis_extend_tests
+	rm -f $(BIN_DIR)/noesis_hub $(BIN_DIR)/noesis_hub_tests
 
 # Install target
 install: all
