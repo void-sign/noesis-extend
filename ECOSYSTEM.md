@@ -1,54 +1,44 @@
-# Noesis Project Ecosystem
+# Noesis Hub Ecosystem
 
-This document provides an overview of the Noesis project ecosystem, which consists of independent yet compatible components.
+This document provides an overview of the Noesis Hub ecosystem.
 
-## Repositories
+## Repository
 
-### 1. Noesis Core
-**Repository:** https://github.com/void-sign/noesis
-
-The core of the Noesis synthetic consciousness engine, featuring:
-- Emotion processing
-- Logic processing
-- Memory management
-- Perception processing
-- Intent processing
-
-**License:** Custom Noesis License (requires attribution and profit-sharing for commercial use)
-
-### 2. Noesis Hub
+### Noesis Hub
 **Repository:** https://github.com/void-sign/noesis-hub
 
-An independent connector hub for the Noesis ecosystem, featuring:
+A fully independent platform connector hub, featuring:
 - Platform integration interfaces
 - Standardized connectors for external systems
 - Integration tools and utilities
+- API-based communication with other systems when needed
 
 **License:** MIT License (permissive use)
 
-## Independent Extension Architecture
+## Independent Architecture
 
-Noesis Hub now follows an independent extension architecture:
+Noesis Hub follows a fully independent architecture:
 
-1. **Optional Core Integration:**
-   - Noesis Hub can operate independently or integrate with Noesis Core
-   - Integration is handled through a plugin architecture
-   - No hard dependency on Noesis Core
+1. **100% Standalone Operation:**
+   - Noesis Hub operates completely independently
+   - No dependencies on external systems
+   - Fully self-contained functionality
 
-2. **Flexible Configuration:**
-   - Environment variable `NOESIS_CORE_PATH` is optional
-   - Extensions auto-discover core functionality when available
-   - Graceful fallback to standalone mode when core is unavailable
+2. **API-Based Communication:**
+   - Well-defined API for external communication
+   - Clean separation between internal and external systems
+   - Robust error handling for API interactions
 
-3. **Extension API:**
-   - Standardized API for all Noesis extensions
+3. **Extension System:**
+   - Standardized plugin system for extensions
    - Well-defined interface boundaries
    - Versioned API compatibility
 
-## Choosing the Right Components
+## Key Capabilities
 
-- **Noesis Core:** For core consciousness simulation functionality
-- **Noesis Hub:** For quantum computing and field theory extensions (can be used independently)
+- **Platform Integration:** Connect various systems and platforms
+- **Data Processing:** Handle data transformation and routing
+- **Extension Framework:** Support for custom extensions and plugins
 - **Combined Use:** For maximum functionality with both components working together
 - **Custom Integration:** Mix and match with your own components using the extension API
 

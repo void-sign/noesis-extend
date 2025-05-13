@@ -4,16 +4,14 @@ This repository serves as a hub for connecting various platforms and systems to 
 
 ## Overview
 
-Noesis Hub is a platform connector hub that provides standardized interfaces for integrating different platforms with Noesis Core. This repository uses the MIT license (more permissive than the core's license) to facilitate integration with external libraries and systems.
+Noesis Hub is a fully independent platform connector hub that provides standardized interfaces for integrating various systems and platforms. This repository uses the MIT license to facilitate integration with external libraries and systems. Noesis Hub is completely standalone and only communicates with Noesis via a well-defined API when needed.
 
 ## Repository Organization
 
-As of v1.0.0, Noesis has been reorganized:
-- **Noesis Core**: https://github.com/void-sign/noesis (Noesis License)
+Noesis Hub is an independent project:
 - **Noesis Hub**: https://github.com/void-sign/noesis-hub (MIT License)
-  - Focused on being a connector hub for different platforms
-
-This organization allows Noesis Core to maintain all core functionality, while Noesis Hub serves as a flexible integration point for various external platforms.
+  - 100% standalone connector hub for different platforms
+  - Communicates with Noesis only through API when necessary
 
 ## Structure
 
@@ -24,13 +22,18 @@ noesis-hub/
 ├── LICENSE (MIT License)
 ├── Makefile
 ├── README.md
-├── changelogs/
-│   └── CHANGELOG_v1.0.0.md
+├── bin/                  # Compiled binaries
 ├── docs/
 │   ├── changelogs/
+│   │   └── CHANGELOG_v1.0.0.md
 │   └── guides/
+│       └── MIGRATION_PLAN.md
+├── examples/             # Example code and usage patterns
 ├── include/
-│   └── noesis_api.h
+│   ├── noesis_api.h      # Main API header
+│   └── noesis/           # Namespaced headers
+│       └── noesis_api.h
+├── lib/                  # Libraries and dependencies
 ├── run.sh                # Central control script for bash users
 ├── run.fish              # Central control script for fish users
 ├── scripts/
@@ -53,19 +56,18 @@ noesis-hub/
 │       ├── link_libraries.fish
 │       └── run.fish
 ├── src/
-│   ├── core/
-│   ├── platforms/
-│   └── tools/
-├── tests/
-├── run.sh
-└── run.fish
+│   ├── core/             # Core functionality
+│   │   ├── main.c
+│   │   └── noesis_api.c
+│   ├── platforms/        # Platform-specific connectors
+│   └── tools/            # Utility tools and helpers
+└── tests/                # Test suite
 ```
 
 ## Installation
 
 ### Prerequisites
 
-- **Noesis Core**: Either installed or path available (see installation steps)
 - **Compiler**: GCC 6.0 or newer
 - **Build System**: Make 3.81 or newer
 - **Shell Environment**:
@@ -81,21 +83,7 @@ noesis-hub/
 
 ### Steps
 
-1. **Set Up Noesis Core**
-   
-   Either install Noesis Core first, or set the environment variable to point to your existing installation:
-
-   For Bash (default):
-   ```bash
-   export NOESIS_CORE_PATH=/path/to/noesis
-   ```
-
-   For Fish (alternative):
-   ```bash
-   set -gx NOESIS_CORE_PATH /path/to/noesis
-   ```
-
-2. **Install Noesis Hub**
+1. **Install Noesis Hub**
 
    Using Bash:
    ```bash
@@ -113,36 +101,36 @@ noesis-hub/
    ```
 
    Using Fish (alternative):
-   ```bash
+   ```fish
    ./scripts/fish/install.fish
    ```
 
 3. **Install Noesis Core (if not already installed)**
 
-   If you don't have Noesis Core installed, you can use our helper scripts:
+   If you don't have Noesis Core installed, you can use our helper scripts (optional, only needed if you want to use Noesis API features):
 
-   Using Bash (default):
+   Using Bash:
    ```bash
-   ./scripts/bash/install_dependency.sh
+   ./run.sh install_dep
    ```
 
-   Using Fish (alternative):
-   ```bash
-   ./scripts/fish/install_dependency.fish
+   Using Fish:
+   ```fish
+   ./run.fish install_dep
    ```
 
-4. **Link Libraries with Core**
+4. **Link Libraries with Core (Optional)**
 
-   This step ensures proper linkage between Noesis Hub and Core:
+   This step enables API connectivity with Noesis Core (if you need it):
    
-   Using Bash (default):
+   Using Bash:
    ```bash
-   ./scripts/bash/link_libraries.sh
+   ./run.sh link_libraries
    ```
 
-   Using Fish (alternative):
-   ```bash
-   ./scripts/fish/link_libraries.fish
+   Using Fish:
+   ```fish
+   ./run.fish link_libraries
    ```
 
 ## Running
@@ -150,15 +138,15 @@ noesis-hub/
 To run Noesis Hub:
 
 ```bash
-./run.sh      # For Bash users
-./run.fish    # For Fish shell users
+./run.sh run      # For Bash users
+./run.fish run    # For Fish shell users
 ```
 
 To run in a specialized Noesis environment:
 
 ```bash
-./scripts/bash/launch_noesis_env.sh   # For Bash users
-./scripts/fish/launch_noesis_env.fish # For Fish shell users
+./run.sh launch_env      # For Bash users
+./run.fish launch_env    # For Fish shell users
 ```
 
 ## Using the Control Scripts

@@ -4,12 +4,11 @@ Thank you for your interest in contributing to Noesis Hub.
 
 ## Important Notes
 
-### Repository Split
-Noesis has been split into two repositories:
-1. **Noesis Core**: https://github.com/void-sign/noesis
-2. **Noesis Hub**: https://github.com/void-sign/noesis-hub (this repository)
-
-Please ensure your contributions go to the appropriate repository.
+### Repository Independence
+Noesis Hub is fully independent:
+1. **Noesis Hub**: https://github.com/void-sign/noesis-hub (this repository)
+   - 100% standalone platform for integration
+   - Only communicates with Noesis via well-defined API when needed
 
 ### Independent Extension Architecture
 Noesis Hub now follows an independent extension architecture:
@@ -24,8 +23,7 @@ Contributions to Noesis Hub are licensed under the MIT License. By contributing,
 
 1. Fork the repository
 2. Clone your fork: `git clone https://github.com/void-sign/noesis-hub.git`
-3. Build the project in standalone mode: `./install.fish`
-   - Optionally, if you want Core integration: `./fish_scripts/install_dependency.fish`
+3. Build the project: `./run.fish install`
 4. Create a branch: `git checkout -b your-feature-branch`
 
 ## Making Changes
@@ -45,23 +43,23 @@ Contributions to Noesis Hub are licensed under the MIT License. By contributing,
 ## Testing
 
 - Add tests for new features
-- Test in both standalone and integrated modes when applicable
 - Ensure all tests pass before submitting
 - Include documentation for new features
+- If adding API-related features, test with appropriate mocks
 
-## Integration with Noesis Core
+## API Integration
 
-Noesis Hub follows an independent extension architecture that can operate with or without Noesis Core:
+Noesis Hub is 100% independent but may communicate with Noesis via a well-defined API:
 
-1. **Standalone Mode:** All quantum functionality works independently without Core
-2. **Plugin Mode:** Can dynamically connect to Noesis Core if available
+1. **Standalone Operation:** All functionality works independently
+2. **API Communication:** Uses well-defined API endpoints when communication is needed
 
-If your changes affect Core integration:
+When working with API-related code:
 
-1. Make a PR to the Noesis Core repository if needed
-2. Reference any Noesis Core PR in your Noesis Hub PR
-3. Ensure your changes respect the optional nature of Core integration
-4. Test functionality both with and without Core present
+1. Use proper abstraction layers
+2. Implement robust error handling for API calls
+3. Ensure the system works even if the API is unavailable
+4. Add appropriate tests with API mocks
 
 ## Communication
 

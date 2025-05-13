@@ -12,7 +12,7 @@ if [ ! -f "./bin/noesis_hub" ]; then
     fi
 fi
 
-# Set library path if Noesis library is found
+# Set library path if external API libraries are found
 if [ -n "$NOESIS_LIB" ]; then
     # Add the library path to LD_LIBRARY_PATH
     export LD_LIBRARY_PATH=$NOESIS_LIB:$LD_LIBRARY_PATH
@@ -22,9 +22,9 @@ if [ -n "$NOESIS_LIB" ]; then
         export DYLD_LIBRARY_PATH=$NOESIS_LIB:$DYLD_LIBRARY_PATH
     fi
     
-    echo "Using Noesis Core libraries from: $NOESIS_LIB"
+    echo "API connection libraries found at: $NOESIS_LIB (optional)"
 else
-    echo "Running in standalone mode (Noesis Core functionality disabled)"
+    echo "Running in standard mode (API connectivity libraries not found)"
 fi
 
 echo "Running Noesis Hub..."
