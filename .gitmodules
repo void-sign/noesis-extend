@@ -1,3 +1,0 @@
-[submodule "external/fish-shell"]
-	path = external/fish-shell
-	url = https://github.com/fish-shell/fish-shell.git

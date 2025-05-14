@@ -102,4 +102,5 @@ noesis_extend_tests
 *.d
 
 # Core dump files
-core
+/core
+core.[0-9]*

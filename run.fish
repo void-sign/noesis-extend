@@ -15,6 +15,9 @@ function show_menu
     echo "6. launch_env      - Launch Noesis Environment" 
     echo "7. cleanup_struct  - Clean up Structure"
     echo "8. cleanup_aggr    - Clean up Structure (Aggressive)"
+    echo "9. start_api       - Start NOE API Server"
+    echo "0. stop_api        - Stop NOE API Server"
+    echo "s. api_status      - Check NOE API Status"
     echo "h. help           - Show this menu"
     echo "q. quit           - Exit this menu"
     echo "=================================="
@@ -55,6 +58,26 @@ if test (count $argv) -gt 0
             run_script "cleanup_structure" $argv[2..-1]
         case cleanup_aggr
             run_script "cleanup_structure_aggressive" $argv[2..-1]
+        case start_api
+            ./src/api/noe_api.fish start
+        case stop_api
+            ./src/api/noe_api.fish stop
+        case api_status
+            ./src/api/noe_api.fish status
+        case process_noe
+            if test (count $argv) -lt 2
+                echo "Error: Missing file path"
+                echo "Usage: ./run.fish process_noe <file_path>"
+                exit 1
+            end
+            ./src/api/noe_api.fish process $argv[2]
+        case exec_noe
+            if test (count $argv) -lt 2
+                echo "Error: Missing command"
+                echo "Usage: ./run.fish exec_noe <command>"
+                exit 1
+            end
+            ./src/api/noe_api.fish exec $argv[2..-1]
         case help
             show_menu
         case '*'
@@ -88,6 +111,12 @@ while true
             run_script "cleanup_structure"
         case 8
             run_script "cleanup_structure_aggressive"
+        case 9
+            ./src/api/noe_api.fish start
+        case 0
+            ./src/api/noe_api.fish stop
+        case s
+            ./src/api/noe_api.fish status
         case h help
             show_menu
         case q quit
