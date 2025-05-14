@@ -24,7 +24,16 @@ end
 function run_script
     set script $argv[1]
     set -e argv[1]
-    ./scripts/fish/$script.fish $argv
+    
+    # Check if script exists in core or tools directory
+    if test -f "./src/core/$script.fish"
+        ./src/core/$script.fish $argv
+    else if test -f "./src/tools/$script.fish"
+        ./src/tools/$script.fish $argv
+    else
+        echo "Error: Script $script.fish not found in src/core or src/tools"
+        return 1
+    end
 end
 
 # Handle arguments if provided
