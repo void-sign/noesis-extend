@@ -12,13 +12,17 @@ function ensure_fish_repo
     end
     
     if not test -d $fish_repo_path
-        echo "Fish shell repository not found. Cloning it now..."
-        pushd $external_path
-        git clone https://github.com/fish-shell/fish-shell.git
-        popd
+        echo "Fish shell repository not found. Initializing git submodule..."
+        git submodule init
+        git submodule update
     else
-        echo "Fish shell repository already exists at $fish_repo_path"
-        echo "To update to the latest version, run: cd $fish_repo_path && git pull"
+        # Check if the directory is empty or missing key files
+        if not test -f $fish_repo_path/CMakeLists.txt
+            echo "Fish shell submodule appears to be empty. Updating submodule..."
+            git submodule update --init --recursive
+        else
+            echo "Fish shell repository already exists at $fish_repo_path"
+            echo "To update to the latest version, run: cd $fish_repo_path && git pull && cd ../.. && git add external/fish-shell && git commit -m 'Update fish-shell submodule'"
     end
     
     echo "Fish shell repository is ready at $fish_repo_path"
