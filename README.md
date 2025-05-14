@@ -1,4 +1,4 @@
-# Noesis Hub v1.0.0
+# Noesis Hub v1.1.0
 
 This repository serves as a hub for connecting various platforms and systems to the Noesis synthetic consciousness system.
 
@@ -17,66 +17,42 @@ Noesis Hub is an independent project:
 
 ```
 noesis-hub/
-├── CONTRIBUTING.md
-├── ECOSYSTEM.md
 ├── LICENSE (MIT License)
-├── Makefile
 ├── README.md
-├── bin/                  # Compiled binaries
 ├── docs/
-│   ├── changelogs/
-│   │   └── CHANGELOG_v1.0.0.md
-│   └── guides/
-│       └── MIGRATION_PLAN.md
-├── examples/             # Example code and usage patterns
-├── include/
-│   ├── noesis_api.h      # Main API header
-│   └── noesis/           # Namespaced headers
-│       └── noesis_api.h
-├── lib/                  # Libraries and dependencies
-├── run.sh                # Central control script for bash users
-├── run.fish              # Central control script for fish users
-├── scripts/
-│   ├── bash/             # Implementation scripts for bash
-│   │   ├── add_external_lib.sh
-│   │   ├── cleanup_repo.sh
-│   │   ├── cleanup_structure.sh
-│   │   ├── install.sh
-│   │   ├── install_dependency.sh
-│   │   ├── launch_noesis_env.sh
-│   │   ├── link_libraries.sh
-│   │   └── run.sh
-│   └── fish/             # Implementation scripts for fish
-│       ├── add_external_lib.fish
-│       ├── cleanup_structure.fish
-│       ├── cleanup_structure_aggressive.fish
-│       ├── install.fish
-│       ├── install_dependency.fish
-│       ├── launch_noesis_env.fish
-│       ├── link_libraries.fish
-│       └── run.fish
+│   ├── API.md           # API documentation
+│   └── changelogs/
+│       └── CHANGELOG_v1.0.0.md
+├── run.fish             # Central control script for fish users
 ├── src/
-│   ├── core/             # Core functionality
-│   │   ├── main.c
-│   │   └── noesis_api.c
-│   ├── platforms/        # Platform-specific connectors
-│   └── tools/            # Utility tools and helpers
-└── tests/                # Test suite
+│   ├── api/             # API components
+│   │   ├── config.fish
+│   │   ├── noe_api.fish
+│   │   ├── noe_processor.fish
+│   │   └── request_handler.fish
+│   ├── core/            # Core functionality
+│   │   ├── add_external_lib.fish
+│   │   ├── install_dependency.fish
+│   │   └── launch_noesis_env.fish
+│   └── tools/           # Utility tools and helpers
+│       ├── install.fish
+│       ├── link_fish.fish
+│       ├── link_fish.sh
+│       └── link_libraries.fish
+└── tests/               # Test suite
 ```
 
 ## Installation
 
 ### Prerequisites
 
-- **Compiler**: GCC 6.0 or newer
-- **Build System**: Make 3.81 or newer
 - **Shell Environment**:
-  - Bash (default): Required for the primary scripts
-  - Fish (alternative): Optional for using the fish shell scripts
+  - Fish: Required for the primary scripts
 - **Development Tools**: 
   - git (for cloning repositories)
   - pkg-config (for managing library flags)
   - cmake (version 3.10 or newer, for building dependencies)
+  - socat (for API server functionality)
 - **Libraries**:
   - libssl-dev (for secure connections)
   - zlib1g-dev (for compression functionality)
@@ -85,50 +61,22 @@ noesis-hub/
 
 1. **Install Noesis Hub**
 
-   Using Bash:
-   ```bash
-   ./run.sh install
-   ```
-
-   Using Fish:
    ```fish
    ./run.fish install
    ```
 
-   Or with the legacy scripts:
-   ```bash
-   ./scripts/bash/install.sh
-   ```
-
-   Using Fish (alternative):
-   ```fish
-   ./scripts/fish/install.fish
-   ```
-
-3. **Install Noesis Core (if not already installed)**
+2. **Install Noesis Core (if not already installed)**
 
    If you don't have Noesis Core installed, you can use our helper scripts (optional, only needed if you want to use Noesis API features):
 
-   Using Bash:
-   ```bash
-   ./run.sh install_dep
-   ```
-
-   Using Fish:
    ```fish
    ./run.fish install_dep
    ```
 
-4. **Link Libraries with Core (Optional)**
+3. **Link Libraries with Core (Optional)**
 
    This step enables API connectivity with Noesis Core (if you need it):
    
-   Using Bash:
-   ```bash
-   ./run.sh link_libraries
-   ```
-
-   Using Fish:
    ```fish
    ./run.fish link_libraries
    ```
@@ -137,17 +85,43 @@ noesis-hub/
 
 To run Noesis Hub:
 
-```bash
-./run.sh run      # For Bash users
-./run.fish run    # For Fish shell users
+```fish
+./run.fish run
 ```
 
 To run in a specialized Noesis environment:
 
-```bash
-./run.sh launch_env      # For Bash users
-./run.fish launch_env    # For Fish shell users
+```fish
+./run.fish launch_env
 ```
+
+### Using the API
+
+To start the NOE API server:
+
+```fish
+./run.fish start_api
+```
+
+To check the API status:
+
+```fish
+./run.fish api_status
+```
+
+To process a .noe file:
+
+```fish
+./run.fish process_noe path/to/file.noe
+```
+
+To stop the API server:
+
+```fish
+./run.fish stop_api
+```
+
+For more information on the API, see [API Documentation](docs/API.md).
 
 ## Using the Control Scripts
 
@@ -157,12 +131,6 @@ Noesis Hub provides central control scripts (`run.sh` and `run.fish`) as user-fr
 
 You can execute specific scripts by supplying the command name as an argument:
 
-For Bash users:
-```bash
-./run.sh [command] [arguments]
-```
-
-For Fish users:
 ```fish
 ./run.fish [command] [arguments]
 ```
@@ -175,25 +143,36 @@ Available commands:
 - `add_lib` - Add External Library
 - `launch_env` - Launch Noesis Environment 
 - `cleanup_struct` - Clean up Structure
-- `cleanup_repo` - Clean up Repository (Bash only)
-- `cleanup_aggr` - Clean up Structure Aggressively (Fish only)
+- `cleanup_aggr` - Clean up Structure Aggressively
+- `start_api` - Start NOE API Server
+- `stop_api` - Stop NOE API Server
+- `api_status` - Check NOE API Status
+- `process_noe` - Process a .noe file
+- `exec_noe` - Execute a command in noe-core repository
 - `help` - Show the command menu
 
 ### Interactive Menu
 
-If you run the control scripts without arguments, they will display an interactive menu:
-
-```bash
-./run.sh
-```
-
-or 
+If you run the control script without arguments, it will display an interactive menu:
 
 ```fish
 ./run.fish
 ```
 
-This will display a numbered menu where you can select the operation you want to perform.
+This will display a numbered menu where you can select the operation you want to perform, including API operations, installation, and environment setup.
+
+## NOE API Integration
+
+The Noesis Hub v1.1.0 introduces a new API for communication with noe-core repositories via `.noe` files. This allows seamless integration between Noesis Hub and external systems.
+
+### API Features
+
+- RESTful API endpoints for communication with noe-core
+- Process .noe files through a standardized interface
+- Execute commands in the noe-core repository 
+- Check the status of the noe-core connection
+
+For detailed information on the API, including request formats and endpoints, see the [API Documentation](docs/API.md).
 
 ## License
 
